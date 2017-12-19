@@ -27,3 +27,43 @@
 */
 
 // Write your JavaScript here
+function changeElementText(element, answer) {
+    $(element).text(answer);
+}
+
+function countMoney(...currencyStrings){
+    var sum = 0;
+    for(var index in currencyStrings){
+        var currencyString = currencyStrings[index];
+        var currencyNote = new CurrencyNote(currencyString);
+        if (currencyNote.isValidCurrency()){
+            sum+= currencyNote.getAmount();
+        }
+        else {
+            break;
+        }
+    }
+    changeElementText("#problemFourAnswer", sum);
+}
+
+class CurrencyNote {
+    constructor(currencyString){
+        this.isValidCurrency = this.isValidCurrency.bind(this);
+        this.getAmount = this.getAmount.bind(this);
+        this.setAmount = this.setAmount.bind(this);
+        this.setAmount(currencyString);
+    }
+    isValidCurrency() {
+        const validAmounts = [5,10,20,50,100,500,1000];
+        return validAmounts.indexOf(this.getAmount())>=0;
+    }
+
+    setAmount(currencyString){
+        var amountString = currencyString.substring(3);
+        this.amount = parseInt(amountString);
+    }
+    getAmount(){
+        return this.amount;
+    }
+
+}

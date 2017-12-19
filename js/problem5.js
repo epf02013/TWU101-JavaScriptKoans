@@ -34,3 +34,40 @@
  */
 
 // Write your JavaScript here
+
+function changeElementText(element, answer) {
+    $(element).text(answer);
+}
+
+function correctAdvertisementUrdu(originalAdvertisement){
+    var advertisement = originalAdvertisement.slice();
+
+    advertisement[0]=advertisement[0].join(" ");
+    advertisement[1] = fixUrduArray(advertisement[1]);
+    advertisement[2] = advertisement[2].join(" ");
+    var advertisementString = advertisement.join(" ");
+
+    var count = getWordCount(originalAdvertisement);
+
+    changeElementText("#advertisementString", advertisementString);
+    changeElementText("#advertisementWordCount", count)
+
+}
+
+function fixUrduArray(originalUrduArray){
+    var urduArray = originalUrduArray.slice();
+    urduArray = urduArray.reverse().join(" ");
+    return urduArray;
+}
+
+function getWordCount(originalAdvertisement){
+    var count = 0;
+
+    count+= originalAdvertisement[0].length;
+
+    count+= originalAdvertisement[1].length;
+
+    count+= originalAdvertisement[2].length;
+
+    return count;
+}
